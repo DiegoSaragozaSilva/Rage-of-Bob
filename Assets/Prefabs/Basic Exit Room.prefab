@@ -4089,12 +4089,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb81985b6d3790041997d7537779d86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  isTreaure: 0
+  isExit: 1
   connectorDirections:
   - East
   - South
   - West
-  isTreaure: 0
-  isExit: 1
+  position: {x: 0, y: 0}
+  height: 0
+  childRooms: []
 --- !u!1 &3714946751287073901
 GameObject:
   m_ObjectHideFlags: 0

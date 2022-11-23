@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Map {
-    private Room rootRoom;
+    public Room rootRoom;
+    
     private List<GameObject> roomPrefabs;
     private List<GameObject> northRooms, eastRooms, southRooms, westRooms;
     private List<string> directions;
@@ -34,12 +35,11 @@ public class Map {
 
     public void constructMapTree(int maxDepth) {
         rootRoom.height = 1;
-        openRoomNode(rootRoom, 0, maxDepth, 0);
+        openRoomNode(rootRoom, 1, maxDepth);
         addExitRoom();
-
     }
 
-    private void openRoomNode(Room roomNode, int depth, int maxDepth, int numTreasureRooms) {
+    private void openRoomNode(Room roomNode, int depth, int maxDepth) {
         if (depth >= maxDepth)
             return;
 
@@ -70,35 +70,62 @@ public class Map {
 
                 if (toOpenRoom.GetComponent<Room>().isExit || toOpenRoom.GetComponent<Room>().isTreaure) goto redo;
                 else {
-                    numTreasureRooms += toOpenRoom.GetComponent<Room>().isTreaure == true ? 1 : 0;
                     GameObject openedRoom = Object.Instantiate(toOpenRoom);
                     roomNode.addChildRoom(openedRoom.GetComponent<Room>(), toOpenDirection);
                     openedRoom.GetComponent<Room>().addChildRoom(roomNode, opositeDirection);
                     openedRoom.GetComponent<Room>().position = openedRoomPosition;
                     openedRoom.GetComponent<Room>().height = depth + 1;
-                    openRoomNode(openedRoom.GetComponent<Room>(), depth++, maxDepth, numTreasureRooms);
+                    openRoomNode(openedRoom.GetComponent<Room>(), depth++, maxDepth);
                 }
             }
-            else
-                goto redo;
+            else goto redo;
         }
     }
 
     private void addExitRoom() {
         Room farthestRoom = getFarthestRoom(rootRoom);
-    }
+        foreach (string direction in directions) {
+            if (farthestRoom.isDirectionFree(direction) && farthestRoom.childRooms[directionToIndex(direction)] != null) {
+                Vector2Int openedRoomPosition = farthestRoom.position;
+                foreach (GameObject roomPrefab in roomPrefabs) {
+                    if (roomPrefab.GetComponent<Room>().isExit) {
+                        GameObject exitPrefab = roomPrefab;
 
-    private Room getFarthestRoom(Room farthestRoom) {
-        Debug.Log(farthestRoom.height);
-        foreach(Room childRoom in farthestRoom.childRooms) {
-            if (childRoom != null && farthestRoom != childRoom) {
-                if (farthestRoom.height < childRoom.height) {
-                    farthestRoom = childRoom;
-                    return getFarthestRoom(farthestRoom);
+                        string opositeDirection = getOpositeDirection(direction);
+                        if (opositeDirection == "North") openedRoomPosition.y -= 1;
+                        else if (opositeDirection == "East") openedRoomPosition.x -= 1;
+                        else if (opositeDirection == "South") openedRoomPosition.y += 1;
+                        else openedRoomPosition.x += 1;
+
+                        GameObject openedRoom = Object.Instantiate(exitPrefab);
+                        farthestRoom.addChildRoom(openedRoom.GetComponent<Room>(), direction);
+                        openedRoom.GetComponent<Room>().addChildRoom(farthestRoom, opositeDirection);
+                        openedRoom.GetComponent<Room>().position = openedRoomPosition;
+                        openedRoom.GetComponent<Room>().height = farthestRoom.height + 1;
+                        return;
+                    }
                 }
             }
         }
-        return farthestRoom;
+    }
+
+    private Room getFarthestRoom(Room room) {      
+        int childCount = 0;
+        foreach (Room childRoom in room.childRooms) {
+            if (childRoom != null) childCount++;
+            if (childCount > 1) break;
+        }
+        if (childCount == 1) return room;
+
+        foreach (Room childRoom in room.childRooms) {
+            if (childRoom != null && childRoom.height > room.height) {
+                Room _room = getFarthestRoom(childRoom);
+                if (_room.height > childRoom.height) return _room;
+                else return childRoom;
+            }
+        }
+
+        return room;
     }
 
     private string getOpositeDirection(string direction) {
@@ -106,5 +133,12 @@ public class Map {
         else if (direction == "East") return "West";
         else if (direction == "South") return "North";
         else return "East";
+    }
+
+    private int directionToIndex(string direction) {
+        if (direction == "North") return 0;
+        else if (direction == "East") return 1;
+        else if (direction == "South") return 2;
+        else return 3;
     }
 }

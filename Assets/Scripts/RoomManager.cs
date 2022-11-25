@@ -31,10 +31,7 @@ public class RoomManager : MonoBehaviour {
     }
 
     public void Update() {
-        if (Input.GetKeyDown("up")) proceedUp();
-        if (Input.GetKeyDown("right")) proceedRight();
-        if (Input.GetKeyDown("down")) proceedDown();
-        if (Input.GetKeyDown("left")) proceedLeft();
+
     }
 
     public void setRoomActive(Room room) {

@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 882518d55b503934cb4d2e6f919c31b2
-      internalID: -1187909032
+      spriteID: fd4aa0c3cdd8a2648bcf26f652c57037
+      internalID: 344492058
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b06225f38cae30243819c8a4a4ac2016
-      internalID: 1552982898
+      spriteID: a47ee13791a1012409500c74e808ebf9
+      internalID: -738167091
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3376d211a2c62c442b504af0ebf9deaa
-      internalID: 1480861713
+      spriteID: 01738728774ac434cbb2321417281d57
+      internalID: 506867306
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5844a9b518671c84aa30b2728949d1a3
-      internalID: -61829382
+      spriteID: 4fb0477984e464d439f9d6d31f7762b5
+      internalID: 1321154706
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      shoot FX_3: -61829382
-      shoot FX_0: -1187909032
-      shoot FX_2: 1480861713
-      shoot FX_1: 1552982898
+      shoot FX_3: 1321154706
+      shoot FX_0: 344492058
+      shoot FX_2: 506867306
+      shoot FX_1: -738167091
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

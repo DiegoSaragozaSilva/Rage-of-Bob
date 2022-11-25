@@ -17,4 +17,15 @@ public class Bullet : MonoBehaviour {
     void Update() {
         transform.position += flyDirection * speed * Time.deltaTime;
     }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag != "Player"){
+            animator.SetBool("isExploding", true);
+        }
+    }
+
+    void Explode()
+    {
+        Destroy(gameObject);
+    }
 }

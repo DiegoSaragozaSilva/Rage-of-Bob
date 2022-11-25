@@ -85,7 +85,7 @@ public class Map {
     private void addExitRoom() {
         Room farthestRoom = getFarthestRoom(rootRoom);
         foreach (string direction in directions) {
-            if (farthestRoom.isDirectionFree(direction) && farthestRoom.childRooms[directionToIndex(direction)] != null) {
+            if (farthestRoom.isDirectionFree(direction) && farthestRoom.childRooms[directionToIndex(direction)] == null) {
                 Vector2Int openedRoomPosition = farthestRoom.position;
                 foreach (GameObject roomPrefab in roomPrefabs) {
                     if (roomPrefab.GetComponent<Room>().isExit) {

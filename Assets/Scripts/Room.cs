@@ -11,13 +11,18 @@ public class Room : MonoBehaviour {
     public Vector2Int position;
     public int height;
     public List<Room> childRooms;
-    
-    public void Awake() {
+    public List<BoxCollider2D> doors;
+
+    public void Awake()
+    {
         childRooms = new List<Room>() {
             null, null, null, null
         };
 
-        gameObject.SetActive(false);
+        foreach (BoxCollider2D collider in gameObject.GetComponents<BoxCollider2D>())
+            doors.Add(collider);
+
+        hide();
     }
 
     public void setId(int id) {
@@ -39,7 +44,8 @@ public class Room : MonoBehaviour {
             return childRooms[3] is null;
     }
 
-    public void addChildRoom(Room room, string direction) {
+    public void addChildRoom(Room room, string direction)
+    {
         if (direction == "North")
             childRooms[0] = room;
         else if (direction == "East")
@@ -51,14 +57,21 @@ public class Room : MonoBehaviour {
     }
 
     public void show() {
-        transform.parent.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void hide() {
-        transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void destroy() {
-        Destroy(transform.parent.gameObject);
+        Destroy(gameObject);
+    }
+
+    public void sendDoorTrigger(int direction, Vector3 teleportPosition) {
+        if (childRooms[direction] != null) {
+            RoomManager roomManager = GameObject.Find("Room Manager").GetComponent<RoomManager>();
+            roomManager.moveToRoom(childRooms[direction], teleportPosition);
+        }
     }
 }

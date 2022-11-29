@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 160962462}
   - component: {fileID: 160962463}
   m_Layer: 0
-  m_Name: RoomManager
+  m_Name: Room Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   basicEndRoom: {fileID: 3489829620433277251, guid: 19d655924029350438650fba0004259c, type: 3}
   basicTreaureRoom: {fileID: 322711949482802143, guid: 525a2b4ff6513ea41ba2b0b8d0eb9405, type: 3}
   currentRoom: {fileID: 0}
+  player: {fileID: 988963495}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

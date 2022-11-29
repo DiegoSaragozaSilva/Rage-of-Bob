@@ -6,11 +6,9 @@ using UnityEngine.Tilemaps;
 public class RoomManager : MonoBehaviour {
     public GameObject basicRoom0, basicRoom1, basicRoom2, basicEndRoom, basicTreaureRoom;
     public Room currentRoom;
+    public GameObject player;
 
     private Map map;
-    private int globalRoomId;
-    private int maxNumRooms;
-    private int totalNumRooms;
 
     public void Start() {
         GameObject startRoom = Instantiate(basicRoom0);
@@ -23,62 +21,18 @@ public class RoomManager : MonoBehaviour {
         map.constructMapTree(2);
 
         currentRoom = map.rootRoom;
-        setRoomActive(currentRoom);
-
-        globalRoomId = 0;
-        maxNumRooms = 10;
-        totalNumRooms = 0;
+        currentRoom.show();
     }
 
     public void Update() {
 
     }
 
-    public void setRoomActive(Room room) {
-        room.gameObject.SetActive(true);
-    }
+    public void moveToRoom(Room room, Vector3 newPlayerPosition) {
+        currentRoom.hide();
+        currentRoom = room;
+        currentRoom.show();
 
-    public void setRoomDisable(Room room) {
-        room.gameObject.SetActive(false);
-    }
-
-    public void proceedUp() {
-        if (currentRoom.childRooms[0] != null) {
-            setRoomDisable(currentRoom);
-            currentRoom = currentRoom.childRooms[0];
-            setRoomActive(currentRoom);
-        }
-        else
-            Debug.Log("No way up!");
-    }
-
-    public void proceedRight() {
-        if (currentRoom.childRooms[1] != null) {
-            setRoomDisable(currentRoom);
-            currentRoom = currentRoom.childRooms[1];
-            setRoomActive(currentRoom);
-        }
-        else
-            Debug.Log("No way right!");
-    }
-
-    public void proceedDown() {
-        if (currentRoom.childRooms[2] != null) {
-            setRoomDisable(currentRoom);
-            currentRoom = currentRoom.childRooms[2];
-            setRoomActive(currentRoom);
-        }
-        else
-            Debug.Log("No way down!");
-    }
-
-    public void proceedLeft() {
-        if (currentRoom.childRooms[3] != null) {
-            setRoomDisable(currentRoom);
-            currentRoom = currentRoom.childRooms[3];
-            setRoomActive(currentRoom);
-        }
-        else
-            Debug.Log("No way left!");
+        player.transform.position = Vector3.zero;
     }
 }

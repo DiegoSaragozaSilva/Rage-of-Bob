@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
             goAnimationIdle();
             animator.SetBool("isRunningDown", true);
         }
-        else if (Input.GetKey("d")) {
+        if (Input.GetKey("d")) {
             movementOffset += new Vector3(speed * Time.deltaTime, 0, 0);
             goAnimationIdle();
             animator.SetBool("isRunningRight", true);

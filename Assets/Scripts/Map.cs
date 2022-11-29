@@ -71,8 +71,8 @@ public class Map {
                 if (toOpenRoom.GetComponent<Room>().isExit || toOpenRoom.GetComponent<Room>().isTreaure) goto redo;
                 else {
                     GameObject openedRoom = Object.Instantiate(toOpenRoom);
-                    roomNode.addChildRoom(openedRoom.GetComponent<Room>(), toOpenDirection);
-                    openedRoom.GetComponent<Room>().addChildRoom(roomNode, opositeDirection);
+                    roomNode.addChildRoom(openedRoom.GetComponent<Room>(), opositeDirection);
+                    openedRoom.GetComponent<Room>().addChildRoom(roomNode, toOpenDirection);
                     openedRoom.GetComponent<Room>().position = openedRoomPosition;
                     openedRoom.GetComponent<Room>().height = depth + 1;
                     openRoomNode(openedRoom.GetComponent<Room>(), depth++, maxDepth);

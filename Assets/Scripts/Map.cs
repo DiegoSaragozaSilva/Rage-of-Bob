@@ -47,7 +47,7 @@ public class Map {
         for (int i = 0; i < numToGenerateRooms; i++) {
             redo:
             string toOpenDirection = roomNode.connectorDirections[Random.Range(0, roomNode.connectorDirections.Count)];
-            if (roomNode.isRoomSpaceFree(toOpenDirection)) {
+            if (roomNode.isDirectionFree(toOpenDirection) && roomNode.isRoomSpaceFree(toOpenDirection)) {
                 GameObject toOpenRoom;
                 Vector2Int openedRoomPosition = roomNode.position;
                 string opositeDirection = getOpositeDirection(toOpenDirection);

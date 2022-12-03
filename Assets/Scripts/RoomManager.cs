@@ -7,6 +7,8 @@ public class RoomManager : MonoBehaviour {
     public GameObject basicRoom0, basicRoom1, basicRoom2, basicEndRoom, basicTreaureRoom;
     public Room currentRoom;
     public GameObject player;
+    public GameObject fader;
+    public GameObject bossNoticeMessage;
 
     private Map map;
 
@@ -25,14 +27,34 @@ public class RoomManager : MonoBehaviour {
     }
 
     public void Update() {
-
+        // Unlock room
+        if (currentRoom.isLocked && currentRoom.totalMonsters == 0)
+            currentRoom.isLocked = false;
     }
 
     public void moveToRoom(Room room, Vector3 newPlayerPosition) {
-        currentRoom.hide();
-        currentRoom = room;
-        currentRoom.show();
+        if (room.isExit && !map.isCompleted()) {
+            bossNoticeMessage.GetComponent<MovementAnimator>().animate();
+            return;
+        }
+        
+        if (!currentRoom.isLocked) {
+            StartCoroutine(fader.GetComponent<Fader>().Fade(true));
 
-        player.transform.position = Vector3.zero;
+            currentRoom.hide();
+            currentRoom = room;
+            currentRoom.show();
+
+            player.transform.position = Vector3.zero;
+        }
+    }
+
+    public void notifyMonsterSpawn() {
+        if (currentRoom.totalMonsters == -1) currentRoom.totalMonsters = 0;
+        currentRoom.totalMonsters++;
+    }
+
+    public void notifyMonsterKill() {
+        currentRoom.totalMonsters--;
     }
 }

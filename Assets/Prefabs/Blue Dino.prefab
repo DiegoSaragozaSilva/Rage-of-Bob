@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6081561172499133720}
   - component: {fileID: 6546879634121626347}
   - component: {fileID: 5174766242537663788}
+  - component: {fileID: 3309745808489681130}
   m_Layer: 0
   m_Name: Blue Dino
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,3 +155,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3309745808489681130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279700809080549944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67b308fb8ce13d4ba4f47070121d724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  health: 0
+  statusBarOffset: 0.6
+  monsterStatusUIPrefab: {fileID: 1834849926889695867, guid: f82d778a8ac490e4f9f63a2b0a60c008, type: 3}

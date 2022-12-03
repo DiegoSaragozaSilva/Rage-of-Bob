@@ -9,7 +9,6 @@ public class Spawner : MonoBehaviour {
 
     public void Start() {
         float rng = Random.Range(0.0f, 1.0f);
-        Debug.Log(rng);
         if (rng <= spawnChance)
             Instantiate(monsterPrefab, transform.position, transform.rotation);
     }

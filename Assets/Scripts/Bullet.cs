@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+    public float attack;
     public Vector3 flyDirection;
     public float speed;
 
@@ -19,12 +20,15 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag != "Player") {
             animator.SetBool("isExploding", true);
+
+            if (collision.gameObject.tag == "Monster")
+                collision.gameObject.GetComponent<Monster>().reduceHealth(attack);
+        }
     }
 
-    void Explode()
-    {
+    void Explode() {
         Destroy(gameObject);
     }
 }

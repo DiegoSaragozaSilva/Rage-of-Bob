@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1812694271583588904}
   - component: {fileID: 1700883100565861851}
   - component: {fileID: 761537177507957276}
+  - component: {fileID: 6771519290006450316}
   m_Layer: 0
   m_Name: Yellow Dino
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,3 +155,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6771519290006450316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513348428209378568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67b308fb8ce13d4ba4f47070121d724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 125
+  health: 0
+  statusBarOffset: 1
+  monsterStatusUIPrefab: {fileID: 1834849926889695867, guid: f82d778a8ac490e4f9f63a2b0a60c008, type: 3}

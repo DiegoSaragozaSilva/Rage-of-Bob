@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Map {
     public Room rootRoom;
-    
+
     private List<GameObject> roomPrefabs;
     private List<GameObject> northRooms, eastRooms, southRooms, westRooms;
     private List<string> directions;
-    private int maxTreasureRooms;
 
     public Map(Room rootRoom, List<GameObject> roomPrefabs, int maxTreasureRooms) {
         this.rootRoom = rootRoom;
         this.roomPrefabs = roomPrefabs;
-        this.maxTreasureRooms = maxTreasureRooms;
 
         northRooms = new List<GameObject>();
         eastRooms = new List<GameObject>();
@@ -37,6 +35,25 @@ public class Map {
         rootRoom.height = 1;
         openRoomNode(rootRoom, 1, maxDepth);
         addExitRoom();
+    }
+
+    public bool isCompleted() {
+        return isRoomCompleted(rootRoom);
+    }
+
+    private bool isRoomCompleted(Room room) {
+        if (room == null || room.isExit)
+            return true;
+
+        if (room.isLocked) return false;
+
+        room.referenced = true;
+        foreach (Room child in room.childRooms)
+            if (child != null && !child.referenced)
+                if (!isRoomCompleted(child)) return false;
+        room.referenced = false;
+
+        return true;
     }
 
     private void openRoomNode(Room roomNode, int depth, int maxDepth) {

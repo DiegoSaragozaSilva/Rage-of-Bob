@@ -5,8 +5,11 @@ using UnityEngine.Tilemaps;
 
 public class Room : MonoBehaviour {
     public int id;
+    public int totalMonsters;
     public bool isTreaure;
     public bool isExit;
+    public bool isLocked;
+    public bool referenced;
     public List<string> connectorDirections;
     public Vector2Int position;
     public int height;
@@ -18,6 +21,10 @@ public class Room : MonoBehaviour {
         childRooms = new List<Room>() {
             null, null, null, null
         };
+
+        totalMonsters = -1;
+        isLocked = true;
+        referenced = false;
 
         foreach (BoxCollider2D collider in gameObject.GetComponents<BoxCollider2D>())
             doors.Add(collider);

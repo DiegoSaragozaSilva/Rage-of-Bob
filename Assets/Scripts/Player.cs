@@ -6,6 +6,8 @@ public class Player : MonoBehaviour {
 
     public float speed;
     public float fireRate;
+    public float maxHealth;
+    public float health;
     public GameObject bulletPrefab;
 
     private float canShoot;
@@ -14,6 +16,8 @@ public class Player : MonoBehaviour {
     void Start() {
         speed = 5.0f;
         fireRate = 0.4f;
+        maxHealth = 100.0f;
+        health = maxHealth;
 
         canShoot = -1.0f;
         animator = GetComponent<Animator>();

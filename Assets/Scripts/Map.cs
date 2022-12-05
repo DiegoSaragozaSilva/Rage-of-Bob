@@ -64,32 +64,35 @@ public class Map {
         for (int i = 0; i < numToGenerateRooms; i++) {
             redo:
             string toOpenDirection = roomNode.connectorDirections[Random.Range(0, roomNode.connectorDirections.Count)];
+            while (toOpenDirection == null)
+                toOpenDirection = roomNode.connectorDirections[Random.Range(0, roomNode.connectorDirections.Count)];
+
+            string opositeDirection = getOpositeDirection(toOpenDirection);
             if (roomNode.isDirectionFree(toOpenDirection) && roomNode.isRoomSpaceFree(toOpenDirection)) {
                 GameObject toOpenRoom;
                 Vector2Int openedRoomPosition = roomNode.position;
-                string opositeDirection = getOpositeDirection(toOpenDirection);
-                if (opositeDirection == "North") {
-                    toOpenRoom = northRooms[Random.Range(0, northRooms.Count)];
+                if (toOpenDirection == "North") {
+                    toOpenRoom = southRooms[Random.Range(0, southRooms.Count)];
                     openedRoomPosition.y -= 1;
                 }
-                else if (opositeDirection == "East") {
-                    toOpenRoom = eastRooms[Random.Range(0, eastRooms.Count)];
+                else if (toOpenDirection == "East") {
+                    toOpenRoom = westRooms[Random.Range(0, westRooms.Count)];
                     openedRoomPosition.x -= 1;
                 }
-                else if (opositeDirection == "South") {
-                    toOpenRoom = southRooms[Random.Range(0, southRooms.Count)];
+                else if (toOpenDirection == "South") {
+                    toOpenRoom = northRooms[Random.Range(0, northRooms.Count)];
                     openedRoomPosition.y += 1;
                 }
                 else {
-                    toOpenRoom = westRooms[Random.Range(0, westRooms.Count)];
+                    toOpenRoom = eastRooms[Random.Range(0, eastRooms.Count)];
                     openedRoomPosition.x += 1;
                 }
 
                 if (toOpenRoom.GetComponent<Room>().isExit || toOpenRoom.GetComponent<Room>().isTreaure) goto redo;
                 else {
                     GameObject openedRoom = Object.Instantiate(toOpenRoom);
-                    roomNode.addChildRoom(openedRoom.GetComponent<Room>(), opositeDirection);
-                    openedRoom.GetComponent<Room>().addChildRoom(roomNode, toOpenDirection);
+                    roomNode.addChildRoom(openedRoom.GetComponent<Room>(), toOpenDirection);
+                    openedRoom.GetComponent<Room>().addChildRoom(roomNode, opositeDirection);
                     openedRoom.GetComponent<Room>().position = openedRoomPosition;
                     openedRoom.GetComponent<Room>().height = depth + 1;
                     openRoomNode(openedRoom.GetComponent<Room>(), depth++, maxDepth);

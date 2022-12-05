@@ -7,6 +7,7 @@ public class Monster : MonoBehaviour
     public float maxHealth;
     public float health;
     public float statusBarOffset;
+    public bool isBoss;
     public GameObject monsterStatusUIPrefab;
 
     private Animator animator;
@@ -41,9 +42,12 @@ public class Monster : MonoBehaviour
 
         RoomManager roomManager = GameObject.Find("Room Manager").GetComponent<RoomManager>();
         roomManager.notifyMonsterKill();
+
+        if (isBoss)
+            GameObject.Find("UI Canvas").GetComponent<GameUIManager>().callWin();
     }
 
-    private void goAnimationIdle() {
+        public void goAnimationIdle() {
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", false);
         animator.SetBool("isDamage", false);

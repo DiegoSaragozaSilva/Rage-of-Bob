@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1922051017896656448}
   - component: {fileID: 4502010243270216947}
-  - component: {fileID: 6081561172499133720}
   - component: {fileID: 6546879634121626347}
   - component: {fileID: 5174766242537663788}
   - component: {fileID: 3309745808489681130}
+  - component: {fileID: -7036506962818616829}
   m_Layer: 0
   m_Name: Blue Dino
   m_TagString: Monster
@@ -62,27 +62,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
---- !u!50 &6081561172499133720
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4279700809080549944}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!95 &6546879634121626347
 Animator:
   serializedVersion: 4
@@ -171,3 +150,19 @@ MonoBehaviour:
   health: 0
   statusBarOffset: 0.6
   monsterStatusUIPrefab: {fileID: 1834849926889695867, guid: f82d778a8ac490e4f9f63a2b0a60c008, type: 3}
+--- !u!114 &-7036506962818616829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279700809080549944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c0814538b90254ab5a8ade9f6ea39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 0.1
+  damage: 5
+  fireRate: 2
+  bulletPrefab: {fileID: 4091061222153241728, guid: fabf9b2b3ee20074ca398ac821a45ae2, type: 3}

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5885281658505672535}
   - component: {fileID: 8465251337850373604}
-  - component: {fileID: 2262721130432052239}
   - component: {fileID: 1286893818724834300}
   - component: {fileID: 923432743353820219}
   - component: {fileID: 3103678985818968308}
+  - component: {fileID: -2602448862128550881}
   m_Layer: 0
   m_Name: Red Dino
   m_TagString: Monster
@@ -62,27 +62,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
---- !u!50 &2262721130432052239
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8098679930742700847}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!95 &1286893818724834300
 Animator:
   serializedVersion: 4
@@ -170,4 +149,22 @@ MonoBehaviour:
   maxHealth: 500
   health: 0
   statusBarOffset: 2
+  isBoss: 1
   monsterStatusUIPrefab: {fileID: 1834849926889695867, guid: f82d778a8ac490e4f9f63a2b0a60c008, type: 3}
+--- !u!114 &-2602448862128550881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098679930742700847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690ed92b33cd37543a9c02bae9636cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 0.1
+  damage: 15
+  meleeRange: 2
+  fireRate: 3
+  bulletPrefab: {fileID: 4091061222153241728, guid: fabf9b2b3ee20074ca398ac821a45ae2, type: 3}

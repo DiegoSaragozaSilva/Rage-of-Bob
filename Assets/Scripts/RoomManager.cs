@@ -11,6 +11,8 @@ public class RoomManager : MonoBehaviour {
     public GameObject bossNoticeMessage;
 
     private Map map;
+    private SoundManager soundManager;
+
 
     public void Start() {
         GameObject startRoom = Instantiate(basicRoom0);
@@ -24,20 +26,29 @@ public class RoomManager : MonoBehaviour {
 
         currentRoom = map.rootRoom;
         currentRoom.show();
+
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
     public void Update() {
         // Unlock room
-        if (currentRoom.isLocked && currentRoom.totalMonsters == 0)
+        if (currentRoom.isLocked && currentRoom.totalMonsters == 0) {
             currentRoom.isLocked = false;
+            player.GetComponent<Player>().health += 5;
+            soundManager.playSound(soundManager.roomUnlock);
+        }
     }
 
     public void moveToRoom(Room room, Vector3 newPlayerPosition) {
-        if (room.isExit && !map.isCompleted()) {
+        bool isMapCompleted = map.isCompleted();
+        if (room.isExit && !isMapCompleted) {
             bossNoticeMessage.GetComponent<MovementAnimator>().animate();
+            soundManager.playSound(soundManager.roomLocked);
             return;
         }
-        
+
+        if (isMapCompleted) soundManager.playSound(soundManager.bossUnlock);
+
         if (!currentRoom.isLocked) {
             StartCoroutine(fader.GetComponent<Fader>().Fade(true));
 
@@ -47,6 +58,7 @@ public class RoomManager : MonoBehaviour {
 
             player.transform.position = Vector3.zero;
         }
+        else soundManager.playSound(soundManager.roomLocked);
     }
 
     public void notifyMonsterSpawn() {
